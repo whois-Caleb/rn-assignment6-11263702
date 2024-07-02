@@ -8,14 +8,14 @@ export default function HomeScreen() {
     return (
         <ScrollView style={homeStyles.container}>
             <StatusBar style="auto" />
-            <View style={homeStyles.navButtonContainer}>
+            {/* <View style={homeStyles.navButtonContainer}>
                 <TouchableOpacity>
                     <Image style={homeStyles.navButton} source={require('../assets/Menu.png')} />
                 </TouchableOpacity>
             </View>
             <View style={homeStyles.header}>
-                <Text>Home</Text>
-            </View>
+                <Text style={homeStyles.headerText}>Home</Text>
+            </View> */}
     
         </ScrollView>
     );
