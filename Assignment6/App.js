@@ -54,7 +54,7 @@ export default function App() {
       
 
       <Drawer.Navigator 
-        initialRouteName="Home"
+        initialRouteName="Checkout"
         screenOptions={{
           headerStyle: {
             backgroundColor: 'white',
@@ -102,6 +102,7 @@ export default function App() {
                   size={30}
                   color="black"
                   style={{marginRight: 10}}
+                  onPress={() => navigation.navigate('Checkout')}
                 />
               </TouchableOpacity>
             </View>

@@ -1,9 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
+const screenWidth = Dimensions.get('window').width;
 export default checkoutStyles = StyleSheet.create({ 
     container: {
         flex: 1,
         backgroundColor: 'white',
+        paddingBottom: 50,
     },
     headerNameContainer: {
         flexDirection: 'column',
@@ -15,7 +17,6 @@ export default checkoutStyles = StyleSheet.create({
         color: 'black',
         fontSize: 30,
         alignSelf: 'center',
-        //fontWeight: 'bold',
         fontFamily: 'Swifted Regular',
     },
     navButtonContainer: {
@@ -33,6 +34,17 @@ export default checkoutStyles = StyleSheet.create({
         width: 40,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    checkOutButton: {
+        backgroundColor: 'black',
+        height: 50,
+        width: screenWidth,
+        position: 'absolute',
+        bottom: 0,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        
     },
 
 });

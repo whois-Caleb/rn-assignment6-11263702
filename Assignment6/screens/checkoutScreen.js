@@ -5,12 +5,10 @@ import { StatusBar } from 'expo-status-bar';
 
 export default function CheckoutScreen(){
     return(
-    <SafeAreaView style={safeViewAndroid.androidSafeArea}>
-        <ScrollView>
-            <StatusBar style="auto" />
-            
-        </ScrollView>
-    </SafeAreaView>
-
+    <ScrollView contentContainerStyle={checkoutStyles.container}>
+        <TouchableOpacity style={checkoutStyles.checkOutButton}>
+            <Text style={{color: 'white', fontSize: 20, fontFamily: 'Swifted Regular'}}>CHECKOUT</Text>
+        </TouchableOpacity>
+    </ScrollView>
     );
 }
