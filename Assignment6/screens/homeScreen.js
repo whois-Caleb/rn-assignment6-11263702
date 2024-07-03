@@ -3,6 +3,13 @@ import homeStyles from "../styles/homeStyles.js";
 import { SafeAreaView, ScrollView, StyleSheet, Text, View, Image, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {Ionicons} from '@expo/vector-icons';
+import { Dresses } from '../data/dressList.js';
+
+const DressItem = ({ dress }) => (
+    <View style={homeStyles.dressContainer}>
+        <Image source={dress.image} style={homeStyles.dressImage} />
+    </View>
+);
 
 export default function HomeScreen() {
     return (
@@ -20,7 +27,7 @@ export default function HomeScreen() {
                             style={{color: 'orange'}}
                             />
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity style={homeStyles.iconCircle}>
                             <Ionicons
                             name='filter'
@@ -28,6 +35,7 @@ export default function HomeScreen() {
                             style={{color: 'orange'}}
                             />
                     </TouchableOpacity>
+
                 </View>
             </View>
         </ScrollView>

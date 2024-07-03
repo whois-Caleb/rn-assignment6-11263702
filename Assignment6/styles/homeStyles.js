@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, ImageBackground } from "react-native";
 
 export default homeStyles = StyleSheet.create({ 
     container: {
@@ -48,5 +48,15 @@ export default homeStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 5,
+    },
+    dressContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    dressImage: {
+        height: 150,
+        width: 150,
     },
 });

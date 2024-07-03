@@ -1,83 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import * as FileSystem from 'expo-file-system';
-import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
+import { Text, View, TouchableOpacity, Platform } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './screens/homeScreen';
 import CheckoutScreen from './screens/checkoutScreen';
 import { Ionicons } from '@expo/vector-icons';
 import homeStyles from './styles/homeStyles';
 import checkoutStyles from './styles/checkoutStyles';
-import Asset from 'expo-asset';
-import dress1 from './assets/dress1.png';
-import dress2 from './assets/dress2.png';
-import dress3 from './assets/dress3.png';
-import dress4 from './assets/dress4.png';
-import dress5 from './assets/dress5.png';
-import dress6 from './assets/dress6.png';
-import dress7 from './assets/dress7.png';
+import { createPicturesDirectory, downloadAssets, fetchFonts, Drawer, picturesDir } from './data/appRequirements';
 
-
-const picturesDir = `${FileSystem.documentDirectory}pictures`;
-const createPicturesDirectory = async () => {
-  const dirInfo = await FileSystem.getInfoAsync(picturesDir);
-  if (!dirInfo.exists) {
-    console.log('Creating pictures directory');
-    await FileSystem.makeDirectoryAsync(picturesDir, { intermediates: true });
-  }
-};
-
-const downloadAssets = async () => {
-  try {
-    await createPicturesDirectory(); 
-    const assets = [
-    { source: dress1, name: 'dress1.png' },
-    { source: dress2, name: 'dress2.png' },
-    { source: dress3, name: 'dress3.png' },
-    { source: dress4, name: 'dress4.png' },
-    { source: dress5, name: 'dress5.png' },
-    { source: dress6, name: 'dress6.png' },
-    { source: dress7, name: 'dress7.png' },
-    ];
-
-    for (const asset of assets) {
-      const localAsset = await Asset.fromModule(asset.source).downloadAsync();
-      await copyFile(localAsset, asset.name);
-    }
-  } catch (error) {
-    console.error('Error in downloadAssets:', error);
-    throw error; // Re-throw the error if you want to handle it further up the chain.
-  }
-};
-
-const copyFile = async (asset, fileName) => {
-  try {
-    const fileUri = `${picturesDir}/${fileName}`;
-    await FileSystem.copyAsync({
-      from: asset.localUri,
-      to: fileUri,
-    });
-    console.log(`Copied ${fileName} to ${fileUri}`);
-  } catch (error) {
-    console.error(`Error copying ${fileName}:`, error);
-  }
-};
-
-const Drawer = createDrawerNavigator();
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    'Swifted Regular' : require('./assets/fonts/Swifted DEMO.otf'),
-  });
-};
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useEffect(() => {
+    (async () => {
+      try {
     createPicturesDirectory().catch(error => {
       console.error('Error creating pictures directory: ', error);
     });
@@ -85,8 +25,19 @@ export default function App() {
     downloadAssets().catch(error => {
       console.error('Error downloading assets: ', error);
     });
+      } catch (error) {
+        console.error('Error in useEffect:', error);
+      }
+    }
+  )
 
   }, []);
+
+  if (Platform.OS !== 'android') {
+    SplashScreen.preventAutoHideAsync().catch((e) => {
+      console.warn(e);
+    });
+  }
 
   if (!fontLoaded) {
   return (
